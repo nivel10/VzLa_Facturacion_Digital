@@ -1,0 +1,111 @@
+[
+  {
+    "rifEmisorFactura": "V123456",
+    "numeroSerie": "B",
+    "cantidadFactura": 1,
+    "facturas": [
+      {
+        "numeroFactura": "FA-2025-02-12-001",
+        "documentoIdentidadCliente": "V654321",
+        "nombreRazonSocialCliente": "Cliente prueba 01",
+        "correoCliente": "customer01.test@yopmail.com",
+        "direccionCliente": "Calle customer 01",
+        "telefonoCliente": "+58 412 5958947",
+        "productos": [
+          {
+            "codigoProducto": "IT-001",
+            "nombreProducto": "Item-001",
+            "descripcionProducto": "Item de prueba - 001",
+            "tipoImpuesto": "G",
+            "cantidadAdquirida": 1.50,
+            "precioProducto": "12,05"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "rifEmisorFactura": "V234567",
+    "numeroSerie": "B",
+    "cantidadFactura": 2,
+    "facturas": [
+      {
+        "numeroFactura": "FA-2025-02-12-002",
+        "documentoIdentidadCliente": "V765432",
+        "nombreRazonSocialCliente": "Cliente prueba 02",
+        "correoCliente": "customer01.test@yopmail.com",
+        "direccionCliente": "Calle customer 02",
+        "telefonoCliente": "+58 412 5958946",
+        "productos": [
+          {
+            "codigoProducto": "IT-002",
+            "nombreProducto": "Item-002",
+            "descripcionProducto": "Item de prueba - 002",
+            "tipoImpuesto": "G",
+            "cantidadAdquirida": 3.28,
+            "precioProducto": "2014,12"
+          },
+          {
+            "codigoProducto": "IT-003",
+            "nombreProducto": "Item-003",
+            "descripcionProducto": "Item de prueba - 003",
+            "tipoImpuesto": "G",
+            "cantidadAdquirida": 12.05,
+            "precioProducto": "05,12"
+          }
+        ]
+      },
+      {
+        "numeroFactura": "FA-2025-02-12-003",
+        "documentoIdentidadCliente": "V876543",
+        "nombreRazonSocialCliente": "Cliente prueba 03",
+        "correoCliente": "customer03.test@yopmail.com",
+        "direccionCliente": "Calle customer 03",
+        "telefonoCliente": "+58 412 5958945",
+        "productos": [
+          {
+            "codigoProducto": "IT-002",
+            "nombreProducto": "Item-002",
+            "descripcionProducto": "Item de prueba - 002",
+            "tipoImpuesto": "G",
+            "cantidadAdquirida": 3.28,
+            "precioProducto": "2014,12"
+          },
+          {
+            "codigoProducto": "IT-003",
+            "nombreProducto": "Item-003",
+            "descripcionProducto": "Item de prueba - 003",
+            "tipoImpuesto": "G",
+            "cantidadAdquirida": 12.05,
+            "precioProducto": "05,12"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "rifEmisorFactura": "V345678",
+    "numeroSerie": "B",
+    "cantidadFactura": 1,
+    "facturas": [
+      {
+        "numeroFactura": "FA-2025-02-12-004",
+        "documentoIdentidadCliente": "V987654",
+        "nombreRazonSocialCliente": "Cliente prueba 04",
+        "correoCliente": "customer04.test@yopmail.com",
+        "direccionCliente": "Calle customer 04",
+        "telefonoCliente": "+58 412 5958949",
+        "productos": [
+          {
+            "codigoProducto": "IT-004",
+            "nombreProducto": "Item-004",
+            "descripcionProducto": "Item de prueba - 004",
+            "tipoImpuesto": "G",
+            "cantidadAdquirida": 11.75,
+            "precioProducto": "10,09"
+          }
+        ]
+      }
+    ]
+  }
+]

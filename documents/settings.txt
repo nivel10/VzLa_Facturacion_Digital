@@ -1,0 +1,7 @@
+API:
+    development:
+        https://temp.cgimprenta.com/
+        https://temp.cgimprenta.com/doc/#api-Facturaci%C3%B3n-AgregarFactura
+
+    roduction:
+        https://cgimprenta.digital/doc/
