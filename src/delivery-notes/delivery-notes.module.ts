@@ -1,11 +1,13 @@
 import { Module, NestModule, MiddlewareConsumer, RequestMethod } from '@nestjs/common';
 import { CommoTokenMiddleware } from 'src/common/middlewares/common-token.middleware';
 import { DeliveryNotesController } from './controllers/delivery-notes.controller';
+import { DeliveryNotesService } from './delivery-notes.service';
+import { HttpModule } from '@nestjs/axios';
 
 @Module({
-    imports: [],
+    imports: [HttpModule],
     controllers: [DeliveryNotesController],
-    providers: [],
+    providers: [DeliveryNotesService],
     exports: [],
 })
 export class DeliveryNotesModule implements NestModule {
