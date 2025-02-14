@@ -9,6 +9,7 @@ import { BanksModule } from './banks/banks.module';
 import { PaymentMethodsModule } from './payment-methods/payment-methods.module';
 import { PartialCreditNotesModule } from './partial-credit-notes/partial-credit-notes.module';
 import { CreditNotesModule } from './credit-notes/credit-notes.module';
+import { DeliveryNotesModule } from './delivery-notes/delivery-notes.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { CreditNotesModule } from './credit-notes/credit-notes.module';
     DispatchGuideModule,
     PartialCreditNotesModule,
     CreditNotesModule,
+    DeliveryNotesModule,
   ],
   controllers: [],
   providers: [],

@@ -2,11 +2,20 @@ import { Type } from 'class-transformer';
 import { ArrayNotEmpty, IsArray, IsEmail, IsEnum, IsNotEmpty, IsNotEmptyObject, IsNumber, IsPhoneNumber, IsString, ValidateNested } from 'class-validator';
 import { DisptachGuideVehicleDto } from './dispatch-guide-vehicle-create.dto';
 
-type tipoImpuestos = 'G' | 'R' | 'A';
-const tipoImpuestosArray: tipoImpuestos[] = ['G', 'R', 'A'];
+enum tipoImpuestosE {
+    G = 'G',
+    R = 'R',
+    A = 'A'
+}
+type tipoImpuestosT = 'G' | 'R' | 'A';
+//const tipoImpuestosArray: tipoImpuestosT[] = ['G', 'R', 'A'];
 
-type cargos = 'chofer' | 'despachador';
-const cargosArray: cargos[] = ['chofer', 'despachador'];
+enum cargosE {
+    chofer = 'chofer',
+    despachador = 'despachador',
+};
+type cargosT = 'chofer' | 'despachador';
+//const cargosArray: cargosT[] = ['chofer', 'despachador'];
 
 export class DisptachGuideCreateDto {
     @IsString()
@@ -95,8 +104,9 @@ class DisptachGuideItemDto {
 
     @IsString()
     @IsNotEmpty()
-    @IsEnum(tipoImpuestosArray)
-    tipoImpuesto: tipoImpuestos;   //Tipo de impuesto(G: General, R: Reducido, A: Adicional)
+    //@IsEnum(tipoImpuestosArray)
+    @IsEnum(tipoImpuestosE)
+    tipoImpuesto: tipoImpuestosT;   //Tipo de impuesto(G: General, R: Reducido, A: Adicional)
 
     @IsNumber()
     @IsNotEmpty()
@@ -122,8 +132,9 @@ class DisptachGuideEmployeeDto {
 
     @IsString()
     @IsNotEmpty()
-    @IsEnum(cargosArray)
-    cargo: cargos;  //Cargo del empleado(valores permitidos: "chofer", "despachador")
+    //@IsEnum(cargosArray)
+    @IsEnum(cargosE)
+    cargo: cargosT;  //Cargo del empleado(valores permitidos: "chofer", "despachador")
 
     @IsEmail()
     @IsString()

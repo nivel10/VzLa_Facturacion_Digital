@@ -1,11 +1,22 @@
 import { ArrayNotEmpty, IsArray, IsEmail, IsEnum, IsNotEmpty, IsNumber, IsPhoneNumber, IsString, Length, MaxLength, MinLength, ValidateIf, ValidateNested } from 'class-validator';
 import { Type } from 'class-transformer';
 
-type tipoImpuesto = 'G' | 'R' | 'A';
-const tipoImpuestoArray: tipoImpuesto[] = ['G', 'R', 'A'];
+enum tipoImpuestoE {
+    G = 'G',
+    R = 'R',
+    A = 'A',
+};
+type tipoImpuestoT = 'G' | 'R' | 'A';
+//const tipoImpuestoArray: tipoImpuestoT[] = ['G', 'R', 'A'];
 
-type order_payment_method = 'divisa' | 'efectivo' | 'pago movil' | 'transferencia';
-const order_payment_methodArray: order_payment_method[] = ['divisa', 'efectivo', 'pago movil', 'transferencia'];
+enum order_payment_methodE {
+    divisa = 'divisa',
+    efectivo = 'efectivo',
+    pago_movil = 'pago movil',
+    transferencia = 'transferencia'
+};
+type order_payment_methodT = 'divisa' | 'efectivo' | 'pago movil' | 'transferencia';
+//const order_payment_methodArray: order_payment_methodT[] = ['divisa', 'efectivo', 'pago movil', 'transferencia'];
 
 export class InvoiceCreateDto {
     // @IsString()
@@ -89,8 +100,9 @@ class ItemDto {
     @IsString()
     @IsNotEmpty()
     @Length(1, 1)
-    @IsEnum(tipoImpuestoArray)
-    tipoImpuesto: tipoImpuesto    //Tipo de impuesto. Campo obligatorio, valores permitidos: "G" (General), "R" (Reducido), "A" (Adicional).
+    //@IsEnum(tipoImpuestoArray)
+    @IsEnum(tipoImpuestoE)
+    tipoImpuesto: tipoImpuestoT    //Tipo de impuesto. Campo obligatorio, valores permitidos: "G" (General), "R" (Reducido), "A" (Adicional).
 
     @IsNumber()
     @IsNotEmpty()
@@ -105,8 +117,9 @@ class PaymentMethods {
     @IsString()
     @IsNotEmpty()
     //order_payment_method: string; //Método de pago. Valores permitidos: "divisa", "efectivo", "pago movil", "transferencia".
-    @IsEnum(order_payment_methodArray)
-    order_payment_method: order_payment_method; //Método de pago. Valores permitidos: "divisa", "efectivo", "pago movil", "transferencia".    
+    //@IsEnum(order_payment_methodArray)
+    @IsEnum(order_payment_methodE)
+    order_payment_method: order_payment_methodT; //Método de pago. Valores permitidos: "divisa", "efectivo", "pago movil", "transferencia".    
     // divisa: Requiere monto total de la factura y calcula IGTF automáticamente si no se proporciona.
     // efectivo: Solo requiere el monto.
     // pago movil: Requiere banco, número de teléfono y número de referencia.
