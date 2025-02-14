@@ -1,15 +1,16 @@
 import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
 import { CommoTokenMiddleware } from 'src/common/middlewares/common-token.middleware';
-import { PartialCreditNoteController } from './controllers/partial-credit-note.controller';
+import { PartialCreditNotesController } from './controllers/partial-credit-note.controller';
 import { HttpModule } from '@nestjs/axios';
+import { PartialCreditNotesService } from './partial-credit-notes.services';
 
 @Module({
     imports: [HttpModule],
-    controllers: [PartialCreditNoteController],
-    providers: [],
+    controllers: [PartialCreditNotesController],
+    providers: [PartialCreditNotesService],
     exports: [],
 })
-export class PartialCreditNoteModule implements NestModule {
+export class PartialCreditNotesModule implements NestModule {
     configure(consumer: MiddlewareConsumer) {
         consumer.apply(CommoTokenMiddleware)
             .forRoutes(

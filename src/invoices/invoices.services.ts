@@ -17,6 +17,7 @@ export class InvoicesService {
     }
 
     async InvoiceCreate(InvoiceCreateDto: InvoiceCreateDto, token: string): Promise<AxiosResponse<any>> {
+        let response: AxiosResponse<any>;
         try {
             // if (!Configuration.appToken) {
             //     const authResponse = await this.authServices.authTokenCreate();
@@ -26,16 +27,14 @@ export class InvoicesService {
             //     }
             // }
 
-            const headers = {
-                'Authorization': `Bearer ${token}`,
-            };
-
-            const response: AxiosResponse = await firstValueFrom(
+            response = await firstValueFrom(
                 this.httpService.post(
                     `${process.env.APP_API_URL_DEV}${process?.env?.APP_API_URL_PREFIX}/add_list_invoice`,
                     InvoiceCreateDto,
                     {
-                        headers: headers,
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                        },
                     }
                 )
             );
@@ -45,9 +44,9 @@ export class InvoicesService {
             throw new HttpException(
                 {
                     //ex: ex,
-                    message: ex?.response?.data?.message || '',
+                    message: ex?.response?.data?.message || ex?.response?.statusText || 'Error creating inovices',
                 },
-                HttpStatus.BAD_REQUEST,
+                ex?.response?.status || HttpStatus.BAD_REQUEST,
             );
         }
     }
