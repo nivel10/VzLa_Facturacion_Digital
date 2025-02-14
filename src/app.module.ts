@@ -8,6 +8,7 @@ import { TaxDocumentsModule } from './tax-documents/tax-documents.module';
 import { BanksModule } from './banks/banks.module';
 import { PaymentMethodsModule } from './payment-methods/payment-methods.module';
 import { PartialCreditNotesModule } from './partial-credit-notes/partial-credit-notes.module';
+import { CreditNotesModule } from './credit-notes/credit-notes.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { PartialCreditNotesModule } from './partial-credit-notes/partial-credit-
     InvoicesModule,
     DispatchGuideModule,
     PartialCreditNotesModule,
+    CreditNotesModule,
   ],
   controllers: [],
   providers: [],
