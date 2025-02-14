@@ -14,7 +14,7 @@ export class DispatchGuideModule implements NestModule {
     configure(consumer: MiddlewareConsumer) {
         consumer.apply(CommoTokenMiddleware)
             .forRoutes(
-                { path: 'dispatch-guide', method: RequestMethod.POST, },
+                { path: 'dispatch-guides', method: RequestMethod.POST, },
             )
     }
 }
