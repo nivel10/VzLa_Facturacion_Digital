@@ -3,7 +3,9 @@ import { Body, Controller, HttpException, HttpStatus, Post, Req } from '@nestjs/
 import { Request } from 'express';
 import { PartialCreditNoteCreateDto } from '../dtos/partial-credit-notes-create.dto';
 import { PartialCreaditNoteResult } from '../entities/partial-credit-notes-result.entity';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('partialCreditNotes')
 @Controller('partial-credit-notes')
 export class PartialCreditNotesController {
     constructor(

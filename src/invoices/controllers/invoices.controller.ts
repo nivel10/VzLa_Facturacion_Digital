@@ -4,7 +4,9 @@ import { Body, Controller, Get, HttpException, HttpStatus, Post, Req } from '@ne
 import { InvoicesService } from '../invoices.services';
 import { Request } from 'express';
 import { AxiosResponse } from 'axios';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('invoices')
 @Controller('invoices')
 export class InvoicesController {
     constructor(

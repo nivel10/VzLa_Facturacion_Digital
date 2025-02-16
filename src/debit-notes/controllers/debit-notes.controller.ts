@@ -2,7 +2,9 @@ import { DebitNotesServices } from './../debit-notes.service';
 import { Body, Controller, HttpException, HttpStatus, Post, Req } from '@nestjs/common';
 import { Request } from 'express';
 import { DebitNoteCreateDto } from '../dtos/debit-notes-create.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('debitNotes')
 @Controller('debit-notes')
 export class DebitNoteController {
     constructor(

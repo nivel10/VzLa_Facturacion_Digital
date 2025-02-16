@@ -3,13 +3,19 @@ import { TaxDocumentsService } from './../tax-documents.service';
 import { Controller, Get, HttpException, HttpStatus, Req } from '@nestjs/common';
 import { AxiosResponse } from 'axios';
 import { TaxDocumentsResultEntity } from '../entities/tax-documents-resultentity';
+import { ApiBearerAuth, ApiBody, ApiHeader, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('taxDocuments')
 @Controller('tax-documents')
 export class TaxDocumentsController {
     constructor(
         private readonly taxDocumentsService: TaxDocumentsService,
     ) { }
 
+    //@ApiBody({type: taxDocumentDto})
+    @ApiBearerAuth()
+    @ApiOperation({ summary: 'get all tax documents' })
+    @ApiResponse({ status: HttpStatus.OK, description: 'return tax documents', type: TaxDocumentsResultEntity })
     @Get()
     async taxDocumentsGet(@Req() req: Request) {
         const token: string = req['token'];

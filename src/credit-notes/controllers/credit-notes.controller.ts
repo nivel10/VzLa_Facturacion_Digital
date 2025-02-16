@@ -3,7 +3,9 @@ import { Body, Controller, HttpException, HttpStatus, Post, Req } from '@nestjs/
 import { Request } from 'express';
 import { CreditNoteCreateDto } from '../dtos/credit-notes-createdto';
 import { CreditNoteResult } from '../entities/credit-notes-result.entity';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('creditNotes')
 @Controller('credit-notes')
 export class CreditNotesController {
     constructor(
