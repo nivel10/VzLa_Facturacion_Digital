@@ -3,7 +3,7 @@ import { Body, Controller, HttpException, HttpStatus, Post, Req } from '@nestjs/
 import { Request } from 'express';
 import { DisptachGuideCreateDto } from '../dtos/dispatch-guide-create.dto';
 import { DispatchGuideResult } from '../entities/dispatch-guide-result.entity';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiGoneResponse, ApiOperation, ApiTags, ApiResponse } from '@nestjs/swagger';
 
 @ApiTags('dispatchGuides')
 @Controller('dispatch-guides')
@@ -12,6 +12,9 @@ export class DispatchGuideController {
         private readonly dispatchGuideService: DispatchGuideService,
     ) { }
 
+    @ApiBearerAuth()
+    @ApiOperation({ summary: 'create dispatch guide / guides' })
+    @ApiResponse({ status: HttpStatus.CREATED, description: 'return dispatch guide / guides created', type: [DispatchGuideResult], })
     @Post()
     async dispatchGuideCreate(@Req() req: Request, @Body() dispatchGuideCreateDto: DisptachGuideCreateDto) {
         try {

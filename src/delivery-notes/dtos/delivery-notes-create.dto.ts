@@ -1,6 +1,7 @@
 import { Type } from 'class-transformer';
 import { ArrayNotEmpty, IsArray, IsEmail, IsEnum, IsNotEmpty, IsNotEmptyObject, IsString, ValidateNested } from 'class-validator';
 import { DeliveryNoteVehicleDto } from './delivery-notes-vehicle.dto';
+import { ApiProperty } from '@nestjs/swagger';
 
 enum cargose {
     'chofer' = 'chofer',
@@ -10,11 +11,44 @@ type cargos = 'chofer' | 'despachador';
 // //const cargosArray: cargos[] = ['chofer', 'despachador'];
 // const cargosArray = ['chofer', 'despachador'];
 
+const notasDeEntregaExamples = [
+    {
+        'numeroFacturaAfectar': 'string',
+        'numeroDeNotaDeEntrega': 'string',
+        'origen': 'string',
+        'destino': 'string',
+        'empleados': [
+            {
+                'nombre': 'string',
+                'apellido': 'string',
+                'DocumentoIdentidad': 'string',
+                'cargo': 'string',
+                'correo': 'string'
+            },
+            {
+                'nombre': 'string',
+                'apellido': 'string',
+                'DocumentoIdentidad': 'string',
+                'cargo': 'string',
+                'correo': 'string'
+            }
+        ],
+        'vehiculo': {
+            'placaVehiculo': 'string',
+            'tipoVehiculo': 'string',
+            'colorVehiculo': 'string',
+            'codigoVehiculo': 'string'
+        }
+    }
+];
+
 export class DeliveryNoteCreateDto {
+    @ApiProperty()
     @IsString()
     @IsNotEmpty()
     numeroSerie: string;    //Serie de la nota de entrega
 
+    @ApiProperty({ example: notasDeEntregaExamples })
     @IsArray()
     @ArrayNotEmpty()
     @ValidateNested()
@@ -66,10 +100,10 @@ class DeliveryNoteEmployeeDto {
 
     @IsString()
     @IsNotEmpty()
-    //cargo: string;  //Cargo del empleado("chofer" o "despachador")
+    //cargo: string;  //Cargo del empleado('chofer' o 'despachador')
     //@IsEnum(cargosArray)
     @IsEnum(cargose)
-    cargo: cargos;  //Cargo del empleado("chofer" o "despachador")
+    cargo: cargos;  //Cargo del empleado('chofer' o 'despachador')
 
     @IsEmail()
     @IsString()

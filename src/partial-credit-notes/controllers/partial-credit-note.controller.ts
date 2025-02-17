@@ -3,7 +3,7 @@ import { Body, Controller, HttpException, HttpStatus, Post, Req } from '@nestjs/
 import { Request } from 'express';
 import { PartialCreditNoteCreateDto } from '../dtos/partial-credit-notes-create.dto';
 import { PartialCreaditNoteResult } from '../entities/partial-credit-notes-result.entity';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags, ApiResponse, ApiOperation } from '@nestjs/swagger';
 
 @ApiTags('partialCreditNotes')
 @Controller('partial-credit-notes')
@@ -12,6 +12,9 @@ export class PartialCreditNotesController {
         private readonly partialCreditNotesService: PartialCreditNotesService,
     ) { }
 
+    @ApiBearerAuth()
+    @ApiOperation({ summary: 'create partial credit note', })
+    @ApiResponse({ status: HttpStatus.CREATED, description: 'return partial credit note created', type: [PartialCreaditNoteResult], })
     @Post()
     async partialCreditNoteCreate(@Req() req: Request, @Body() partialCreditNoteCreateDto: PartialCreditNoteCreateDto) {
         try {

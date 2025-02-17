@@ -1,6 +1,7 @@
 import { Type } from 'class-transformer';
 import { ArrayNotEmpty, IsArray, IsEmail, IsEnum, IsNotEmpty, IsNotEmptyObject, IsNumber, IsPhoneNumber, IsString, ValidateNested } from 'class-validator';
 import { DisptachGuideVehicleDto } from './dispatch-guide-vehicle-create.dto';
+import { ApiProperty } from '@nestjs/swagger';
 
 enum tipoImpuestosE {
     G = 'G',
@@ -17,15 +18,63 @@ enum cargosE {
 type cargosT = 'chofer' | 'despachador';
 //const cargosArray: cargosT[] = ['chofer', 'despachador'];
 
+const guiasDeDespachoExamples = [
+    {
+        'numeroDeGuiaDeDespacho': 'string',
+        'documentoIdentidadCliente': 'string',
+        'nombreRazonSocialCliente': 'string',
+        'correoCliente': 'string',
+        'direccionCliente': 'string',
+        'telefonoCliente': 'string',
+        'origen': 'string',
+        'destino': 'string',
+        'productos': [
+            {
+                'codigoProducto': 'string',
+                'nombreProducto': 'string',
+                'descripcionProducto': 'string',
+                'tipoImpuesto': 'string',
+                'cantidadAdquirida': 0,
+                'precioProducto': 'string'
+            }
+        ],
+        'empleados': [
+            {
+                'nombre': 'string',
+                'apellido': 'string',
+                'DocumentoIdentidad': 'string',
+                'cargo': 'string',
+                'correo': 'string'
+            },
+            {
+                'nombre': 'string',
+                'apellido': 'string',
+                'DocumentoIdentidad': 'string',
+                'cargo': 'string',
+                'correo': 'string'
+            }
+        ],
+        'vehiculo': {
+            'placaVehiculo': 'string',
+            'tipoVehiculo': 'string',
+            'colorVehiculo': 'string',
+            'codigoVehiculo': 'string'
+        }
+    }
+];
+
 export class DisptachGuideCreateDto {
+    @ApiProperty()
     @IsString()
     @IsNotEmpty()
     numeroSerie: string;    //Serie de la guía de despacho
 
+    @ApiProperty()
     @IsNumber()
     @IsNotEmpty()
     cantidadGDP: number;    //Cantidad de guías de despacho(debe coincidir con el número de elementos en el array guiasDeDespacho)
 
+    @ApiProperty({ example: [guiasDeDespachoExamples] })
     @IsArray()
     @ArrayNotEmpty()
     @ValidateNested()
@@ -134,7 +183,7 @@ class DisptachGuideEmployeeDto {
     @IsNotEmpty()
     //@IsEnum(cargosArray)
     @IsEnum(cargosE)
-    cargo: cargosT;  //Cargo del empleado(valores permitidos: "chofer", "despachador")
+    cargo: cargosT;  //Cargo del empleado(valores permitidos: 'chofer', 'despachador')
 
     @IsEmail()
     @IsString()
