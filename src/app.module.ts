@@ -18,6 +18,15 @@ import { DebitNotesModule } from './debit-notes/debit-notes.module';
       isGlobal: true,
       load: [],
     }),
+    // ServeStaticModule.forRoot(
+    //   {
+    //     //rootPath: join(__dirname, '..', 'public'),
+    //     rootPath: join(process.cwd(), './public'),
+    //     //rootPath: join(__dirname, 'client',),
+    //     //serveStaticOptions: { index: false, },
+    //     //serveRoot: 'client'
+    //   },
+    // ),
     Configuration,
     AuthModule,
     TaxDocumentsModule,

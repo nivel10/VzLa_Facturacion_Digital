@@ -1,5 +1,6 @@
 import { ArrayNotEmpty, IsArray, IsEmail, IsEnum, IsNotEmpty, IsNumber, IsPhoneNumber, IsString, Length, MaxLength, MinLength, ValidateIf, ValidateNested } from 'class-validator';
 import { Type } from 'class-transformer';
+import { ApiProperty } from '@nestjs/swagger';
 
 enum tipoImpuestoE {
     G = 'G',
@@ -18,6 +19,40 @@ enum order_payment_methodE {
 type order_payment_methodT = 'divisa' | 'efectivo' | 'pago movil' | 'transferencia';
 //const order_payment_methodArray: order_payment_methodT[] = ['divisa', 'efectivo', 'pago movil', 'transferencia'];
 
+const invoiceExamples = {
+    'facturas': [
+        {
+            'numeroFactura': 'string',
+            'documentoIdentidadCliente': 'string',
+            'nombreRazonSocialCliente': 'string',
+            'correoCliente': 'string',
+            'direccionCliente': 'string',
+            'telefonoCliente': 'string',
+            'productos': [
+                {
+                    'codigoProducto': 'string',
+                    'nombreProducto': 'string',
+                    'descripcionProducto': 'string',
+                    'tipoImpuesto': 'string',
+                    'cantidadAdquirida': 0,
+                    'precioProducto': 'string'
+                }
+            ],
+            'tasa_del_dia': 'string',
+            'order_payment_methods': [
+                {
+                    'order_payment_method': 'string',
+                    'monto': 'string',
+                    'igtf': 'string',
+                    'banco': 'string',
+                    'telefono_pago_movil': 'string',
+                    'numero_de_refencia_de_operacion': 'string'
+                }
+            ]
+        }
+    ]
+};
+
 export class InvoiceCreateDto {
     // @IsString()
     // @IsNotEmpty()
@@ -25,14 +60,17 @@ export class InvoiceCreateDto {
     // @MaxLength(10)
     // rifEmisorFactura: string;	//RIF del emisor de la factura.
 
+    @ApiProperty()
     @IsString()
     @IsNotEmpty()
     numeroSerie: string;	//Serie de la factura.
 
+    @ApiProperty()
     @IsNumber()
     @IsNotEmpty()
     cantidadFactura: number;	//Cantidad de facturas.
 
+    @ApiProperty({ example: invoiceExamples })
     @IsArray()
     @ArrayNotEmpty()
     @ValidateNested()
@@ -76,7 +114,7 @@ class InvoiceDto {
     productos: ItemDto[];	//Lista de productos.
 
     @IsString()
-    tasa_del_dia?: string;    //Tasa de cambio del día. Campo opcional, debe usar punto como separador decimal (ejemplo: "56.65").
+    tasa_del_dia?: string;    //Tasa de cambio del día. Campo opcional, debe usar punto como separador decimal (ejemplo: '56.65').
 
     @IsArray()
     @ValidateNested()
@@ -102,7 +140,7 @@ class ItemDto {
     @Length(1, 1)
     //@IsEnum(tipoImpuestoArray)
     @IsEnum(tipoImpuestoE)
-    tipoImpuesto: tipoImpuestoT    //Tipo de impuesto. Campo obligatorio, valores permitidos: "G" (General), "R" (Reducido), "A" (Adicional).
+    tipoImpuesto: tipoImpuestoT    //Tipo de impuesto. Campo obligatorio, valores permitidos: 'G' (General), 'R' (Reducido), 'A' (Adicional).
 
     @IsNumber()
     @IsNotEmpty()
@@ -110,16 +148,16 @@ class ItemDto {
 
     @IsString()
     @IsNotEmpty()
-    precioProducto: number;	//Precio del producto. Campo obligatorio, debe ser un número decimal usando coma como separador y máximo 2 decimales (ejemplo: "1,55").
+    precioProducto: number;	//Precio del producto. Campo obligatorio, debe ser un número decimal usando coma como separador y máximo 2 decimales (ejemplo: '1,55').
 }
 
 class PaymentMethods {
     @IsString()
     @IsNotEmpty()
-    //order_payment_method: string; //Método de pago. Valores permitidos: "divisa", "efectivo", "pago movil", "transferencia".
+    //order_payment_method: string; //Método de pago. Valores permitidos: 'divisa', 'efectivo', 'pago movil', 'transferencia'.
     //@IsEnum(order_payment_methodArray)
     @IsEnum(order_payment_methodE)
-    order_payment_method: order_payment_methodT; //Método de pago. Valores permitidos: "divisa", "efectivo", "pago movil", "transferencia".    
+    order_payment_method: order_payment_methodT; //Método de pago. Valores permitidos: 'divisa', 'efectivo', 'pago movil', 'transferencia'.    
     // divisa: Requiere monto total de la factura y calcula IGTF automáticamente si no se proporciona.
     // efectivo: Solo requiere el monto.
     // pago movil: Requiere banco, número de teléfono y número de referencia.
@@ -137,15 +175,15 @@ class PaymentMethods {
     @IsString()
     @IsNotEmpty()
     @ValidateIf(pa => pa.order_payment_method === 'transferencia' || pa.order_payment_method === 'pago movil')
-    banco?: string; //Nombre del banco. Obligatorio para "transferencia" y "pago movil".
+    banco?: string; //Nombre del banco. Obligatorio para 'transferencia' y 'pago movil'.
 
     @IsString()
     @IsNotEmpty()
     @ValidateIf(pa => pa.order_payment_method === 'pago movil')
-    telefono_pago_movil?: string;    //Número de teléfono. Obligatorio solo para "pago movil".
+    telefono_pago_movil?: string;    //Número de teléfono. Obligatorio solo para 'pago movil'.
 
     @IsString()
     @IsNotEmpty()
     @ValidateIf(pa => pa.order_payment_method === 'pago movil' || pa.order_payment_method === 'transferencia')
-    numero_de_refencia_de_operacion: string; //Número de referencia. Obligatorio para "transferencia" y "pago movil".
+    numero_de_refencia_de_operacion: string; //Número de referencia. Obligatorio para 'transferencia' y 'pago movil'.
 }

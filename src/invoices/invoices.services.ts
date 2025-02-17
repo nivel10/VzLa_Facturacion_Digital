@@ -1,7 +1,7 @@
 import { HttpService } from '@nestjs/axios';
 import { InvoiceCreateDto } from './dtos/invoiceCreate.dto';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import * as invoicesLocal from '../providers/json/invoicesFull.json';
+//import * as invoicesLocal from '../providers/json/invoicesFull.json';
 import { AxiosResponse } from 'axios';
 import { firstValueFrom } from 'rxjs';
 
@@ -10,11 +10,11 @@ export class InvoicesService {
     constructor(
         private readonly httpService: HttpService,
     ) { }
-    private invoices = invoicesLocal;
+    // private invoices = invoicesLocal;
 
-    invoicesAll() {
-        return this.invoices;
-    }
+    // invoicesAll() {
+    //     return this.invoices;
+    // }
 
     async InvoiceCreate(InvoiceCreateDto: InvoiceCreateDto, token: string): Promise<AxiosResponse<any>> {
         let response: AxiosResponse<any>;
